@@ -1,3 +1,4 @@
+"use client"
 import styles from "./Navbar.module.css"
 import Link from "next/link"
 import {
@@ -9,13 +10,23 @@ import {
 	IconTrendingUp3,
 	IconBrandHipchat,
 } from "@tabler/icons-react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 export default function Navbar() {
 	const [expanded, setExpanded] = useState(false)
+	const timeoutRef = useRef(null)
 
-	const toggleExpanded = () => {
-		setExpanded((prev) => !prev)
+	const handleMouseEnter = () => {
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current)
+		}
+		setExpanded(true)
+	}
+
+	const handleMouseLeave = () => {
+		timeoutRef.current = setTimeout(() => {
+			setExpanded(false)
+		}, 200) // 200ms delay
 	}
 
 	const menuItems = [
@@ -23,7 +34,7 @@ export default function Navbar() {
 		{
 			name: "Profile & Settings",
 			path: "/profile",
-			icon: <IconAdjustmentsCheck size={24} />,
+			icon: <IconAdjustmentsCheck />,
 		},
 		{ name: "Calculators", path: "/calculators", icon: <IconCalculator /> },
 		{ name: "Fasting", path: "/fasting", icon: <IconCarrotOff /> },
@@ -31,30 +42,27 @@ export default function Navbar() {
 		{ name: "Progress", path: "/progress", icon: <IconTrendingUp3 /> },
 		{ name: "Forum", path: "/forum", icon: <IconBrandHipchat /> },
 	]
+
 	return (
-		/* provide animation effect to entire menu on hover */
 		<nav
-			className={`${styles.navbar} ${expanded ? styles.expanded : ""}`}
-			onMouseEnter={toggleExpanded}
-			onMouseLeave={toggleExpanded}
+			className={`${styles.navbar} ${
+				expanded ? styles.expanded : styles.collapsed
+			}`}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
 		>
-			{/* Menu Items */}
 			{menuItems.map((item, index) => (
-				<Link key={index} href={item.path}>
-					{item.icon}
-				</Link>
+				<div key={index} className={styles.linkContainer}>
+					<Link href={item.path} className={styles.linkIcon}>
+						{item.icon}
+					</Link>
+					<div className={styles.linkContainerExpanded}>
+						<Link href={item.path} className={styles.linkText}>
+							{item.name}
+						</Link>
+					</div>
+				</div>
 			))}
-			{/* <Link href="/dashboard">
-			{/* 			<h1 className="">Welcome to the home page</h1>
-			<Link href="/dashboard">Dashboard</Link>
-			<Link href="/profile">Profile & Settings</Link>
-			<Link href="/calculators">Calculators</Link>
-			<Link href="/fasting">Fasting</Link>
-			<Link href="/workoutbuilder">Workout Builder</Link>
-			<Link href="/progress">Progress</Link>
-			<Link href="/forum">Forum</Link> */}
-			{/* 			<Link href="/profile">{menuItems[0].icon}</Link>
-			 */}{" "}
 		</nav>
 	)
 }
