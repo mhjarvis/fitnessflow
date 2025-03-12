@@ -1,13 +1,21 @@
 @import "tailwindcss";
 
-/* Define the rustic color palette using CSS variables */
+/* Custom CSS variables for color theming */
+/* 	--background-color: #f8f9fa;
+	--text-color: #333; 
+	--primary-color: #007bff;
+	--secondary-color: #6c757d;
+	--accent-color: #28a745;
+	--light-text-color: #fff;
+ */
+
 :root {
-	--primary-color: #8b4513; /* Saddle Brown - for headers, nav background */
-	--secondary-color: #556b2f; /* Dark Olive Green - for borders, labels */
-	--accent-color: #d2691e; /* Chocolate - for buttons, highlights */
-	--background-color: #f5f5dc; /* Beige - main background */
-	--text-color: #333333; /* Dark Gray - body text */
-	--light-text-color: #ffffff; /* White - text on dark backgrounds */
+	--primary-color: #2e8b57;
+	--secondary-color: #4682b4;
+	--accent-color: #cd853f;
+	--background-color: #f0f8ff;
+	--text-color: #333333;
+	--light-text-color: #ffffff;
 }
 
 /* Global styles for body and html */
