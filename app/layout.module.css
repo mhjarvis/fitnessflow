@@ -1,5 +1,23 @@
+/* layout.module.css */
+
+/* Container styles */
 .container {
-	display: grid;
-	grid-template-columns: 70px 1fr;
+	display: flex; /* Use flexbox for side-by-side layout */
+	min-height: 100vh; /* Ensure the container takes up full viewport height */
+}
+
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 70px;
 	height: 100vh;
+	background-color: #f0f0f0;
+	z-index: 1000;
+}
+
+.mainContent {
+	margin-left: 70px;
+	width: calc(100% - 70px);
+	padding: 20px;
 }
