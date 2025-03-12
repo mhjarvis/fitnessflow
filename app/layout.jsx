@@ -1,11 +1,12 @@
 "use client"
 import "@/assets/styles/global.css"
+import styles from "./layout.module.css"
 import Navbar from "@/components/navbar/Navbar"
 
 export default function MainLayout({ children }) {
 	return (
 		<html lang="en">
-			<body>
+			<body className={styles.container}>
 				<Navbar />
 				<main>{children}</main>
 			</body>
